@@ -11,7 +11,8 @@
 ``mvn clean install``
  2. start the containers
  ``docker-compose up``
- 3. Enjoy!
+ 3. For admin console go to: https://localhost:4848/ user: admin & password = admin
+ 4. Rest endpoint url: http://localhost:8080/web-module/users
   
  The development environment was:
  1. JDK9 (The project it self is target to run with Java 8)
