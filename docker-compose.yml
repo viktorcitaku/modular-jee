@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  web:
+    build: .
+    container_name: modular-jee-web
+    tty: true
+    ports:
+      - 8080:8080
+      - 8181:8181
+      - 4848:4848
+    restart: always
+  db_mysql:
+    image: mysql
+    container_name: modular-jee-mysql
+    tty: true
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=simple_db
+  db_postgres:
+    image: postgres
+    container_name: modular-jee-postgres
+    tty: true
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=simple_db

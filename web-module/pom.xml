@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.github.viktorcitaku</groupId>
+    <artifactId>modular-jee</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>web-module</artifactId>
+  <packaging>war</packaging>
+
+  <name>Web Module</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.github.viktorcitaku</groupId>
+      <artifactId>contract</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- ===================================== -->
+    <!-- We can exclude one JAR and modify     -->
+    <!-- accordingly the beans.xml to pickup   -->
+    <!-- the right implementation for the      -->
+    <!-- contract                              -->
+
+    <dependency>
+      <groupId>io.github.viktorcitaku</groupId>
+      <artifactId>mysql-module</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.viktorcitaku</groupId>
+      <artifactId>postgres-module</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- ===================================== -->
+  </dependencies>
+
+  <build>
+    <finalName>web-module</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
