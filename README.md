@@ -19,7 +19,7 @@
 
  Architecture overview:
  
- ![alt text] ()
+ ![alt text] (https://github.com/viktorcitaku/modular-jee/blob/master/architecture/ModularJavaEE.png)
  
  
 
