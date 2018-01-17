@@ -19,8 +19,4 @@
 
  Architecture overview:
  
- ![alt text] (https://github.com/viktorcitaku/modular-jee/blob/master/architecture/ModularJavaEE.png)
- 
- 
-
-
+![alt Architecture Overview](https://github.com/viktorcitaku/modular-jee/blob/master/architecture/ModularJavaEE.png)
