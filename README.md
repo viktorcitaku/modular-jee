@@ -20,3 +20,12 @@
  Architecture overview:
  
 ![alt Architecture Overview](https://github.com/viktorcitaku/modular-jee/blob/master/architecture/ModularJavaEE.png)
+
+- **web-module.war** can run also without one of the **mysql-module.jar** and **postgres-module**.
+- - When one of the modules is removed _beans.xml_ should be modified in **web-module.war** where the following line of code should be changes: ``  <alternatives>
+    <class>io.github.viktorcitaku.mysqlmodule.UserDaoBean</class>
+  </alternatives> ``.
+- **contract.jar** module contains entity classes, interfaces, qualifiers, cdi stereotypes, JPA Producers for either MySQL or PostgresSQL.
+- - The inteface called ``UserDao`` has two implementation which live on one of the modules **mysql-module.jar** and **postgres-module**.
+- - The entity class defined in contract is necessary to be included in the entity classes in the ``persistence.xml`` since JPA seems to scan just the war and not the JARs too.
+- The purple boxes represent the main technologies used among many other provided by Java EE 8.
