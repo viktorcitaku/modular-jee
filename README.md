@@ -2,8 +2,7 @@
 
  ---
 
- Simple Java EE 8 Modular Architecture application! The intention was to test modular architecture
- by providing two implementation for different datasource one for MySQL and the other for PostgreSQL.
+ Simple Java EE 8 Modular Architecture application! The intention was to test modular architecture by providing two implementations for different data source one for MySQL and the other for PostgreSQL.
  
  To run the application execute the following commands:
  
