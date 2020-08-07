@@ -10,7 +10,7 @@ services:
       - 4848:4848
     restart: always
   db_mysql:
-    image: mysql
+    image: mysql:5.7.31
     container_name: modular-jee-mysql
     tty: true
     restart: always

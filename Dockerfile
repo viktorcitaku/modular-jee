@@ -20,35 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-FROM oracle/glassfish:5.0
+FROM payara/server-full
 
 LABEL key="Viktor Çitaku"
 
-ENV ADMIN_PASSWORD=admin \
-    DEPLOYMENT_DIR=${GLASSFISH_HOME}/glassfish/domains/domain1/autodeploy \
-    JDBC_LIB_DIR=${GLASSFISH_HOME}/glassfish/domains/domain1/lib
+ENV WEB_ARCHIVE web-module-1.0.0-SNAPSHOT.war
+ENV JDBC_LIB_DIR=${PAYARA_DIR}/glassfish/domains/production/lib
 
-COPY ./jdbc/mysql-connector-java-5.1.45-bin.jar ${JDBC_LIB_DIR}
-COPY ./jdbc/postgresql-42.1.4.jar ${JDBC_LIB_DIR}
-
-RUN \
-  echo "AS_ADMIN_NEWPASSWORD=${ADMIN_PASSWORD}" >> /tmp/glassfishpwd && \
-  asadmin start-domain && \
-  asadmin --user admin --passwordfile=/tmp/glassfishpwd create-jdbc-connection-pool \
-  --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource \
-  --restype javax.sql.ConnectionPoolDataSource \
-  --property url="jdbc\:mysql\://modular-jee-mysql\:3306/simple_db?user\=root&password\=root" \
-   ModularJeeMySQLPool && \
-  asadmin --user admin --passwordfile=/tmp/glassfishpwd create-jdbc-resource \
-  --connectionpoolid ModularJeeMySQLPool jdbc/ModularJeeMySQLDataSource && \
-  asadmin --user admin --passwordfile=/tmp/glassfishpwd create-jdbc-connection-pool \
-  --datasourceclassname org.postgresql.ds.PGConnectionPoolDataSource \
-  --restype javax.sql.ConnectionPoolDataSource \
-  --property url="jdbc\:postgresql\://modular-jee-postgres\:5432/simple_db:username=postgres:password=root" \
-   ModularJeePostgreSQLPool && \
-  asadmin --user admin --passwordfile=/tmp/glassfishpwd create-jdbc-resource \
-  --connectionpoolid ModularJeePostgreSQLPool jdbc/ModularJeePostgreSQLDataSource
-
-ENV WEB_ARCHIVE web-module.war
-COPY ./web-module/target/${WEB_ARCHIVE} ${DEPLOYMENT_DIR}
-
+COPY ./jdbc/mysql-connector-java-5.1.48.jar ${JDBC_LIB_DIR}
+COPY ./jdbc/postgresql-42.2.14.jar ${JDBC_LIB_DIR}
+COPY ./scripts/post-boot-commands.asadmin ${POSTBOOT_COMMANDS}
+COPY ./web-module/target/${WEB_ARCHIVE} ${PAYARA_DIR}/glassfish/domains/production/autodeploy

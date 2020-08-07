@@ -26,7 +26,8 @@ package io.github.viktorcitaku.webmodule.boundary;
 
 import io.github.viktorcitaku.contract.User;
 import io.github.viktorcitaku.contract.UserDao;
-
+import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
@@ -44,8 +45,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.logging.Logger;
 
 @Path("users")
 @RequestScoped
@@ -57,8 +56,7 @@ public class UserService {
   private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
   // No need to make this private
-  @Inject
-  UserDao userDao;
+  @Inject UserDao userDao;
 
   @PostConstruct
   protected void postConstruct() {

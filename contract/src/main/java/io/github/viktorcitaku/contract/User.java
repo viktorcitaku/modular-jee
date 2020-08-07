@@ -24,6 +24,8 @@
 
 package io.github.viktorcitaku.contract;
 
+import java.io.Serializable;
+import java.util.Objects;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.bind.annotation.JsonbProperty;
@@ -32,11 +34,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 public class User implements Serializable {
@@ -56,8 +53,7 @@ public class User implements Serializable {
   private String lastName;
 
   // Required by JPA
-  public User() {
-  }
+  public User() {}
 
   public User(String firstName, String lastName) {
     this.firstName = firstName;
@@ -86,8 +82,7 @@ public class User implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (!(obj instanceof User))
-      return false;
+    if (!(obj instanceof User)) return false;
     User u = (User) obj;
     return this.id.equals(u.getId());
   }
@@ -99,17 +94,23 @@ public class User implements Serializable {
 
   @Override
   public String toString() {
-    return "{\n" +
-      "id: " + this.id + ",\n" +
-      "firstName: " + this.firstName + ",\n" +
-      "lastName: " + this.lastName + ",\n" +
-      "}\n";
+    return "{\n"
+        + "id: "
+        + this.id
+        + ",\n"
+        + "firstName: "
+        + this.firstName
+        + ",\n"
+        + "lastName: "
+        + this.lastName
+        + ",\n"
+        + "}\n";
   }
 
   public JsonObject toJson() {
     return Json.createObjectBuilder()
-      .add("firstName", this.firstName)
-      .add("lastName", this.lastName)
-      .build();
+        .add("firstName", this.firstName)
+        .add("lastName", this.lastName)
+        .build();
   }
 }

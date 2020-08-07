@@ -1,37 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.viktorcitaku</groupId>
-  <artifactId>modular-jee</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0</version>
+	<groupId>io.github.viktorcitaku</groupId>
+	<artifactId>modular-jee</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
 
-  <name>Modular Java EE</name>
+	<name>Modular Java EE</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>8.0</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+	<!-- The order is important -->
+	<modules>
+		<module>contract</module>
+		<module>mysql-module</module>
+		<module>postgres-module</module>
+		<module>web-module</module>
+	</modules>
 
-  <!-- The order is important -->
-  <modules>
-    <module>contract</module>
-    <module>mysql-module</module>
-    <module>postgres-module</module>
-    <module>web-module</module>
-  </modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>jakarta.platform</groupId>
+				<artifactId>jakarta.jakartaee-api</artifactId>
+				<version>8.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.viktorcitaku</groupId>
+				<artifactId>contract</artifactId>
+				<version>${project.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.github.viktorcitaku</groupId>
+				<artifactId>mysql-module</artifactId>
+				<version>${project.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.github.viktorcitaku</groupId>
+				<artifactId>postgres-module</artifactId>
+				<version>${project.version}</version>
+				<scope>compile</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!-- This plugin is suggested by Google Java Format -->
+			<plugin>
+				<groupId>com.coveo</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

@@ -25,11 +25,10 @@
 package io.github.viktorcitaku.webmodule;
 
 import io.github.viktorcitaku.webmodule.boundary.UserService;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 @ApplicationPath("api")
 public class AppRoot extends Application {

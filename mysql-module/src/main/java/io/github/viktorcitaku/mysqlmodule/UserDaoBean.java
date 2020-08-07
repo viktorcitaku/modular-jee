@@ -29,13 +29,12 @@ import io.github.viktorcitaku.contract.UserDao;
 import io.github.viktorcitaku.contract.config.CommonException;
 import io.github.viktorcitaku.contract.config.DaoBean;
 import io.github.viktorcitaku.contract.config.MySQLDataSource;
-
+import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.logging.Logger;
 
 @DaoBean
 public class UserDaoBean implements UserDao {
@@ -44,9 +43,7 @@ public class UserDaoBean implements UserDao {
   // private static final System.Logger LOGGER = System.getLogger(Class.class.getName());
   private static final Logger LOGGER = Logger.getLogger(UserDaoBean.class.getName());
 
-  @Inject
-  @MySQLDataSource
-  EntityManager em;
+  @Inject @MySQLDataSource EntityManager em;
 
   @PostConstruct
   protected void postConstruct() {
@@ -60,8 +57,7 @@ public class UserDaoBean implements UserDao {
 
   @Override
   public void create(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     em.persist(user);
   }
 
@@ -72,15 +68,13 @@ public class UserDaoBean implements UserDao {
 
   @Override
   public User update(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     return em.merge(user);
   }
 
   @Override
   public void delete(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     em.remove(user);
   }
 

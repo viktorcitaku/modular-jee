@@ -24,15 +24,15 @@
 
 package io.github.viktorcitaku.contract.config;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Stereotype;
-import javax.transaction.Transactional;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Stereotype;
+import javax.transaction.Transactional;
 
 @RequestScoped
 @Transactional
@@ -41,5 +41,4 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
-public @interface DaoBean {
-}
+public @interface DaoBean {}

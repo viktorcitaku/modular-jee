@@ -24,11 +24,10 @@
 
 package io.github.viktorcitaku.contract.config;
 
+import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class DataSourceProvider {
 
@@ -41,15 +40,13 @@ public class DataSourceProvider {
   public EntityManager getMySQLDataSource() {
     LOGGER.info("MySQL Data Source is picked up!");
 
-    return Persistence.createEntityManagerFactory("mySQL-pu")
-      .createEntityManager();
+    return Persistence.createEntityManagerFactory("mySQL-pu").createEntityManager();
   }
 
   @Produces
   @PostgreSQLDataSource
   public EntityManager getPostgreSQLDataSource() {
     LOGGER.info("PostgreSQL Data Source is picked up!");
-    return Persistence.createEntityManagerFactory("postgreSQL-pu")
-      .createEntityManager();
+    return Persistence.createEntityManagerFactory("postgreSQL-pu").createEntityManager();
   }
 }

@@ -29,23 +29,18 @@ import io.github.viktorcitaku.contract.UserDao;
 import io.github.viktorcitaku.contract.config.CommonException;
 import io.github.viktorcitaku.contract.config.DaoBean;
 import io.github.viktorcitaku.contract.config.PostgreSQLDataSource;
-
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.List;
 
 @DaoBean
 public class UserDaoBean implements UserDao {
 
-  @Inject
-  @PostgreSQLDataSource
-  EntityManager em;
-
+  @Inject @PostgreSQLDataSource EntityManager em;
 
   @Override
   public void create(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     em.persist(user);
   }
 
@@ -56,15 +51,13 @@ public class UserDaoBean implements UserDao {
 
   @Override
   public User update(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     return em.merge(user);
   }
 
   @Override
   public void delete(User user) {
-    if (user == null)
-      throw new CommonException("User cannot be null!");
+    if (user == null) throw new CommonException("User cannot be null!");
     em.remove(user);
   }
 
