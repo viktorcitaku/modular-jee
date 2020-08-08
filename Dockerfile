@@ -29,5 +29,5 @@ ENV JDBC_LIB_DIR=${PAYARA_DIR}/glassfish/domains/production/lib
 
 COPY ./jdbc/mysql-connector-java-5.1.48.jar ${JDBC_LIB_DIR}
 COPY ./jdbc/postgresql-42.2.14.jar ${JDBC_LIB_DIR}
-COPY ./scripts/post-boot-commands.asadmin ${POSTBOOT_COMMANDS}
-COPY ./web-module/target/${WEB_ARCHIVE} ${PAYARA_DIR}/glassfish/domains/production/autodeploy
+COPY ./web-module/target/${WEB_ARCHIVE} ${DEPLOY_DIR}
+COPY ./payara/config/post-boot-commands.asadmin ${POSTBOOT_COMMANDS}
