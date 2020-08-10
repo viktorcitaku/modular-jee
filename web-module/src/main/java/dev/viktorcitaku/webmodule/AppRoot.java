@@ -22,31 +22,21 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract.config;
+package dev.viktorcitaku.webmodule;
 
-import java.util.logging.Logger;
-import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import dev.viktorcitaku.webmodule.boundary.UserService;
+import java.util.HashSet;
+import java.util.Set;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-public class DataSourceProvider {
+@ApplicationPath("api")
+public class AppRoot extends Application {
 
-  // In Java 9 and above System.getLogger(...) will be used!
-  // private static final System.Logger LOGGER = System.getLogger(Class.class.getName());
-  private static final Logger LOGGER = Logger.getLogger(DataSourceProvider.class.getName());
-
-  @Produces
-  @MySQLDataSource
-  public EntityManager getMySQLDataSource() {
-    LOGGER.info("MySQL Data Source is picked up!");
-
-    return Persistence.createEntityManagerFactory("mySQL-pu").createEntityManager();
-  }
-
-  @Produces
-  @PostgreSQLDataSource
-  public EntityManager getPostgreSQLDataSource() {
-    LOGGER.info("PostgreSQL Data Source is picked up!");
-    return Persistence.createEntityManagerFactory("postgreSQL-pu").createEntityManager();
+  @Override
+  public Set<Class<?>> getClasses() {
+    Set<Class<?>> classes = new HashSet<>();
+    classes.add(UserService.class);
+    return classes;
   }
 }

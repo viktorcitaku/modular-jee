@@ -22,23 +22,17 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract.config;
+package dev.viktorcitaku.contract.config;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Stereotype;
-import javax.transaction.Transactional;
+import javax.inject.Qualifier;
 
-@RequestScoped
-@Transactional
-@Alternative
-@Stereotype
+@Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
-public @interface DaoBean {}
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD})
+public @interface PostgreSQLDataSource {}

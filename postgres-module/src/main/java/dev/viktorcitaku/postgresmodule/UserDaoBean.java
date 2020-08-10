@@ -22,38 +22,21 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.mysqlmodule;
+package dev.viktorcitaku.postgresmodule;
 
-import io.github.viktorcitaku.contract.User;
-import io.github.viktorcitaku.contract.UserDao;
-import io.github.viktorcitaku.contract.config.CommonException;
-import io.github.viktorcitaku.contract.config.DaoBean;
-import io.github.viktorcitaku.contract.config.MySQLDataSource;
+import dev.viktorcitaku.contract.User;
+import dev.viktorcitaku.contract.UserDao;
+import dev.viktorcitaku.contract.config.CommonException;
+import dev.viktorcitaku.contract.config.DaoBean;
+import dev.viktorcitaku.contract.config.PostgreSQLDataSource;
 import java.util.List;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @DaoBean
 public class UserDaoBean implements UserDao {
 
-  // In Java 9 and above System.getLogger(...) will be used!
-  // private static final System.Logger LOGGER = System.getLogger(Class.class.getName());
-  private static final Logger LOGGER = Logger.getLogger(UserDaoBean.class.getName());
-
-  @Inject @MySQLDataSource EntityManager em;
-
-  @PostConstruct
-  protected void postConstruct() {
-    LOGGER.info("UserDaoBean @PostConstruct");
-  }
-
-  @PreDestroy
-  protected void preDestroy() {
-    LOGGER.info("UserDaoBean @PreDestroy");
-  }
+  @Inject @PostgreSQLDataSource EntityManager em;
 
   @Override
   public void create(User user) {

@@ -3,5 +3,3 @@ create-jdbc-resource --connectionpoolid ModularJeeMySQLPool jdbc/ModularJeeMySQL
 
 create-jdbc-connection-pool --datasourceclassname org.postgresql.ds.PGConnectionPoolDataSource --restype javax.sql.ConnectionPoolDataSource --property user=postgres:password=root:url="jdbc\:postgresql\://modular-jee-postgres\:5432/simple_db" ModularJeePostgreSQLPool
 create-jdbc-resource --connectionpoolid ModularJeePostgreSQLPool jdbc/ModularJeePostgreSQLDataSource
-
-deploy --contextroot web-module /opt/payara/deployments/web-module-1.0.0-SNAPSHOT.war

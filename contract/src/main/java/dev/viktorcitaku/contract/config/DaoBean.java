@@ -22,19 +22,23 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract;
+package dev.viktorcitaku.contract.config;
 
-import java.util.List;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Stereotype;
+import javax.transaction.Transactional;
 
-public interface UserDao {
-
-  void create(User user);
-
-  List<User> getUsers();
-
-  User update(User user);
-
-  void delete(User user);
-
-  User findById(Long id);
-}
+@RequestScoped
+@Transactional
+@Alternative
+@Stereotype
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+public @interface DaoBean {}

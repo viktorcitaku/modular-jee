@@ -22,13 +22,19 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract.config;
+package dev.viktorcitaku.contract;
 
-import javax.ws.rs.WebApplicationException;
+import java.util.List;
 
-public class CommonException extends WebApplicationException {
+public interface UserDao {
 
-  public CommonException(String message) {
-    super(message);
-  }
+  void create(User user);
+
+  List<User> getUsers();
+
+  User update(User user);
+
+  void delete(User user);
+
+  User findById(Long id);
 }

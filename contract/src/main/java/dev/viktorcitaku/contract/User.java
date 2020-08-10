@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract;
+package dev.viktorcitaku.contract;
 
 import java.io.Serializable;
 import java.util.Objects;

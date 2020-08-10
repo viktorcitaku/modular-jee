@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.contract.config;
+package dev.viktorcitaku.contract.config;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

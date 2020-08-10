@@ -27,7 +27,12 @@ LABEL key="Viktor Çitaku"
 ENV WEB_ARCHIVE web-module-1.0.0-SNAPSHOT.war
 ENV JDBC_LIB_DIR=${PAYARA_DIR}/glassfish/domains/production/lib
 
-COPY ./jdbc/mysql-connector-java-5.1.48.jar ${JDBC_LIB_DIR}
-COPY ./jdbc/postgresql-42.2.14.jar ${JDBC_LIB_DIR}
-COPY ./web-module/target/${WEB_ARCHIVE} ${DEPLOY_DIR}
-COPY ./payara/config/post-boot-commands.asadmin ${POSTBOOT_COMMANDS}
+# Copy over the JDBC drivers for MySQL and Postgres
+COPY --chown=payara ./jdbc/mysql-connector-java-5.1.48.jar ${JDBC_LIB_DIR}
+COPY --chown=payara ./jdbc/postgresql-42.2.14.jar ${JDBC_LIB_DIR}
+
+# Copy over the post-boot-command
+COPY --chown=payara ./payara/config/post-boot-commands.asadmin ${POSTBOOT_COMMANDS}
+
+# Copy over the WAR to deployment directory
+COPY --chown=payara ./web-module/target/${WEB_ARCHIVE} ${DEPLOY_DIR}

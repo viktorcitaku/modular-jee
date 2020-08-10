@@ -5,6 +5,6 @@
        bean-discovery-mode="all"
        version="2.0">
   <alternatives>
-    <class>io.github.viktorcitaku.postgresmodule.UserDaoBean</class>
+    <class>dev.viktorcitaku.postgresmodule.UserDaoBean</class>
   </alternatives>
 </beans>

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-package io.github.viktorcitaku.webmodule.boundary;
+package dev.viktorcitaku.webmodule.boundary;
 
-import io.github.viktorcitaku.contract.User;
-import io.github.viktorcitaku.contract.UserDao;
+import dev.viktorcitaku.contract.User;
+import dev.viktorcitaku.contract.UserDao;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
