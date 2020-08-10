@@ -17,6 +17,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=simple_db
+    ports:
+      - 3306:3306
   db_postgres:
     image: postgres
     container_name: modular-jee-postgres
@@ -25,3 +27,5 @@ services:
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=simple_db
+    ports:
+      - 5432:5432

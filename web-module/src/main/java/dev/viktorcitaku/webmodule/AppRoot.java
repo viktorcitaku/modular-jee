@@ -24,7 +24,7 @@
 
 package dev.viktorcitaku.webmodule;
 
-import dev.viktorcitaku.webmodule.boundary.UserService;
+import dev.viktorcitaku.webmodule.boundary.PersonService;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -36,7 +36,7 @@ public class AppRoot extends Application {
   @Override
   public Set<Class<?>> getClasses() {
     Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
+    classes.add(PersonService.class);
     return classes;
   }
 }

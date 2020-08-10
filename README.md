@@ -11,7 +11,7 @@
  2. start the containers
  ``docker-compose up``
  3. For admin console go to: https://localhost:4848/ user: admin & password = admin
- 4. Rest endpoint url: http://localhost:8080/web-module/users
+ 4. Rest endpoint url: http://localhost:8080/web-module/api/persons
   
  The development environment was:
  1. OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.8+10) (The project itself targets to run under Java 8)

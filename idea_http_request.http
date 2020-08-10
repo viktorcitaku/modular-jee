@@ -1,0 +1,22 @@
+GET http://localhost:8080/web-module/api/persons
+Accept: application/json
+
+###
+
+POST http://localhost:8080/web-module/api/persons
+Content-Type: application/json
+
+{
+  "firstName": "Max",
+  "lastName": "Foo"
+}
+
+###
+
+POST http://localhost:8080/web-module/api/persons
+Content-Type: application/json
+
+{
+  "firstName": "Felix",
+  "lastName": "Bar"
+}

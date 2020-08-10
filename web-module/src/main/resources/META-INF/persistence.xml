@@ -6,7 +6,7 @@
 
 	<persistence-unit name="mySQL-pu" transaction-type="JTA">
 		<jta-data-source>jdbc/ModularJeeMySQLDataSource</jta-data-source>
-		<class>dev.viktorcitaku.contract.User</class>
+		<class>dev.viktorcitaku.contract.Person</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>
@@ -14,7 +14,7 @@
 
 	<persistence-unit name="postgreSQL-pu" transaction-type="JTA">
 		<jta-data-source>jdbc/ModularJeePostgreSQLDataSource</jta-data-source>
-		<class>dev.viktorcitaku.contract.User</class>
+		<class>dev.viktorcitaku.contract.Person</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>

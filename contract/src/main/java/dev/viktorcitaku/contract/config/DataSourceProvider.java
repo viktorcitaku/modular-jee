@@ -39,7 +39,6 @@ public class DataSourceProvider {
   @MySQLDataSource
   public EntityManager getMySQLDataSource() {
     LOGGER.info("MySQL Data Source is picked up!");
-
     return Persistence.createEntityManagerFactory("mySQL-pu").createEntityManager();
   }
 

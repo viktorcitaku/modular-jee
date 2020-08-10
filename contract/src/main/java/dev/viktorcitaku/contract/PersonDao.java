@@ -26,15 +26,15 @@ package dev.viktorcitaku.contract;
 
 import java.util.List;
 
-public interface UserDao {
+public interface PersonDao {
 
-  void create(User user);
+  void create(Person person);
 
-  List<User> getUsers();
+  List<Person> getPersons();
 
-  User update(User user);
+  Person update(Person person);
 
-  void delete(User user);
+  void delete(Person person);
 
-  User findById(Long id);
+  Person findById(Long id);
 }

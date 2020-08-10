@@ -24,7 +24,6 @@
 		<dependency>
 			<groupId>io.github.viktorcitaku</groupId>
 			<artifactId>contract</artifactId>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

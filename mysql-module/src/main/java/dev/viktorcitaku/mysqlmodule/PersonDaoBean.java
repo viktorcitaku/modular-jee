@@ -24,8 +24,8 @@
 
 package dev.viktorcitaku.mysqlmodule;
 
-import dev.viktorcitaku.contract.User;
-import dev.viktorcitaku.contract.UserDao;
+import dev.viktorcitaku.contract.Person;
+import dev.viktorcitaku.contract.PersonDao;
 import dev.viktorcitaku.contract.config.CommonException;
 import dev.viktorcitaku.contract.config.DaoBean;
 import dev.viktorcitaku.contract.config.MySQLDataSource;
@@ -37,51 +37,51 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @DaoBean
-public class UserDaoBean implements UserDao {
+public class PersonDaoBean implements PersonDao {
 
   // In Java 9 and above System.getLogger(...) will be used!
   // private static final System.Logger LOGGER = System.getLogger(Class.class.getName());
-  private static final Logger LOGGER = Logger.getLogger(UserDaoBean.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(PersonDaoBean.class.getName());
 
   @Inject @MySQLDataSource EntityManager em;
 
   @PostConstruct
   protected void postConstruct() {
-    LOGGER.info("UserDaoBean @PostConstruct");
+    LOGGER.info("PersonDaoBean @PostConstruct");
   }
 
   @PreDestroy
   protected void preDestroy() {
-    LOGGER.info("UserDaoBean @PreDestroy");
+    LOGGER.info("PersonDaoBean @PreDestroy");
   }
 
   @Override
-  public void create(User user) {
-    if (user == null) throw new CommonException("User cannot be null!");
-    em.persist(user);
+  public void create(Person person) {
+    if (person == null) throw new CommonException("Person cannot be null!");
+    em.persist(person);
   }
 
   @Override
-  public List<User> getUsers() {
-    return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+  public List<Person> getPersons() {
+    return em.createQuery("SELECT u FROM Person u", Person.class).getResultList();
   }
 
   @Override
-  public User update(User user) {
-    if (user == null) throw new CommonException("User cannot be null!");
-    return em.merge(user);
+  public Person update(Person person) {
+    if (person == null) throw new CommonException("Person cannot be null!");
+    return em.merge(person);
   }
 
   @Override
-  public void delete(User user) {
-    if (user == null) throw new CommonException("User cannot be null!");
-    em.remove(user);
+  public void delete(Person person) {
+    if (person == null) throw new CommonException("Person cannot be null!");
+    em.remove(person);
   }
 
   @Override
-  public User findById(Long id) {
+  public Person findById(Long id) {
     if (id == null || id <= 0)
-      throw new CommonException("User id cannot be null or 0 or negative number!");
-    return em.find(User.class, id);
+      throw new CommonException("Person id cannot be null or 0 or negative number!");
+    return em.find(Person.class, id);
   }
 }

@@ -14,6 +14,16 @@
 	<packaging>war</packaging>
 
 	<name>Web Module</name>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -21,29 +31,19 @@
 			<artifactId>jakarta.jakartaee-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.github.viktorcitaku</groupId>
-			<artifactId>contract</artifactId>
-			<scope>compile</scope>
-		</dependency>
 		<!-- ===================================== -->
 		<!-- We can exclude one JAR and modify     -->
 		<!-- accordingly the beans.xml to pickup   -->
 		<!-- the right implementation for the      -->
 		<!-- contract                              -->
-
 		<dependency>
 			<groupId>io.github.viktorcitaku</groupId>
 			<artifactId>mysql-module</artifactId>
-			<scope>compile</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>io.github.viktorcitaku</groupId>
 			<artifactId>postgres-module</artifactId>
-			<scope>compile</scope>
 		</dependency>
-
 		<!-- ===================================== -->
 	</dependencies>
 
