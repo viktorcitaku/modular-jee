@@ -5,6 +5,6 @@
        bean-discovery-mode="all"
        version="2.0">
   <alternatives>
-    <class>dev.viktorcitaku.postgresmodule.PersonDaoBean</class>
+    <class>dev.viktorcitaku.mysqlmodule.PersonDaoBean</class>
   </alternatives>
 </beans>
