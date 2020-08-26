@@ -24,8 +24,8 @@
 
 package dev.viktorcitaku.postgresmodule;
 
-import dev.viktorcitaku.contract.Person;
-import dev.viktorcitaku.contract.PersonDao;
+import dev.viktorcitaku.contract.User;
+import dev.viktorcitaku.contract.UserDao;
 import dev.viktorcitaku.contract.config.CommonException;
 import dev.viktorcitaku.contract.config.DaoBean;
 import dev.viktorcitaku.contract.config.PostgreSQLDataSource;
@@ -34,37 +34,37 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @DaoBean
-public class PersonDaoBean implements PersonDao {
+public class UserDaoBean implements UserDao {
 
   @Inject @PostgreSQLDataSource EntityManager em;
 
   @Override
-  public void create(Person person) {
-    if (person == null) throw new CommonException("Person cannot be null!");
-    em.persist(person);
+  public void create(User user) {
+    if (user == null) throw new CommonException("User cannot be null!");
+    em.persist(user);
   }
 
   @Override
-  public List<Person> getPersons() {
-    return em.createQuery("SELECT u FROM Person u", Person.class).getResultList();
+  public List<User> getUsers() {
+    return em.createQuery("SELECT u FROM User u", User.class).getResultList();
   }
 
   @Override
-  public Person update(Person person) {
-    if (person == null) throw new CommonException("Person cannot be null!");
-    return em.merge(person);
+  public User update(User user) {
+    if (user == null) throw new CommonException("User cannot be null!");
+    return em.merge(user);
   }
 
   @Override
-  public void delete(Person person) {
-    if (person == null) throw new CommonException("Person cannot be null!");
-    em.remove(person);
+  public void delete(User user) {
+    if (user == null) throw new CommonException("User cannot be null!");
+    em.remove(user);
   }
 
   @Override
-  public Person findById(Long id) {
+  public User findById(Long id) {
     if (id == null || id <= 0)
-      throw new CommonException("Person id cannot be null or 0 or negative number!");
-    return em.find(Person.class, id);
+      throw new CommonException("User id cannot be null or 0 or negative number!");
+    return em.find(User.class, id);
   }
 }

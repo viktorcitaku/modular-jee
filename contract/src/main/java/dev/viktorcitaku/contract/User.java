@@ -36,7 +36,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Person implements Serializable {
+public class User implements Serializable {
 
   @Id
   @JsonbProperty
@@ -53,9 +53,9 @@ public class Person implements Serializable {
   private String lastName;
 
   // Required by JPA
-  public Person() {}
+  public User() {}
 
-  public Person(String firstName, String lastName) {
+  public User(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -82,8 +82,8 @@ public class Person implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (!(obj instanceof Person)) return false;
-    Person u = (Person) obj;
+    if (!(obj instanceof User)) return false;
+    User u = (User) obj;
     return this.id.equals(u.getId());
   }
 

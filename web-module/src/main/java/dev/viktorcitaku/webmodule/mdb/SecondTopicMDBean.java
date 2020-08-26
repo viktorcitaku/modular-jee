@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2017 Viktor Citaku
+ * Copyright (c) 2020 Viktor Citaku
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,39 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.webmodule;
+package dev.viktorcitaku.webmodule.mdb;
 
-import dev.viktorcitaku.webmodule.boundary.JmsDemoService;
-import dev.viktorcitaku.webmodule.boundary.UserService;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import java.util.logging.Logger;
+import javax.ejb.ActivationConfigProperty;
+import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 
-@ApplicationPath("api")
-public class AppRoot extends Application {
+@MessageDriven(
+    activationConfig = {
+      @ActivationConfigProperty(
+          propertyName = "destinationLookup",
+          propertyValue = "jms/SimpleTopic"),
+      @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
+    })
+public class SecondTopicMDBean implements MessageListener {
+
+  private static final Logger LOGGER = Logger.getLogger(SecondTopicMDBean.class.getName());
+
+  public SecondTopicMDBean() {}
 
   @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
-    classes.add(JmsDemoService.class);
-    return classes;
+  public void onMessage(Message message) {
+    try {
+      if (message instanceof TextMessage) {
+        LOGGER.info("The message from topic: " + ((TextMessage) message).getText());
+      } else {
+        throw new JMSException("Unsupported Message Type");
+      }
+    } catch (Exception e) {
+      LOGGER.severe("Exception: " + e.getMessage());
+    }
   }
 }

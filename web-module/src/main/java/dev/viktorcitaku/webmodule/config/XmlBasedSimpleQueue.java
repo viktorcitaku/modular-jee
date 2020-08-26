@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2017 Viktor Citaku
+ * Copyright (c) 2020 Viktor Citaku
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,17 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.webmodule;
+package dev.viktorcitaku.webmodule.config;
 
-import dev.viktorcitaku.webmodule.boundary.JmsDemoService;
-import dev.viktorcitaku.webmodule.boundary.UserService;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.inject.Qualifier;
 
-@ApplicationPath("api")
-public class AppRoot extends Application {
-
-  @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
-    classes.add(JmsDemoService.class);
-    return classes;
-  }
-}
+@Qualifier
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD})
+public @interface XmlBasedSimpleQueue {}

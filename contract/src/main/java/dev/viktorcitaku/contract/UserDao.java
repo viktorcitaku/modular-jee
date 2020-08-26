@@ -22,23 +22,19 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.webmodule;
+package dev.viktorcitaku.contract;
 
-import dev.viktorcitaku.webmodule.boundary.JmsDemoService;
-import dev.viktorcitaku.webmodule.boundary.UserService;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import java.util.List;
 
-@ApplicationPath("api")
-public class AppRoot extends Application {
+public interface UserDao {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
-    classes.add(JmsDemoService.class);
-    return classes;
-  }
+  void create(User user);
+
+  List<User> getUsers();
+
+  User update(User user);
+
+  void delete(User user);
+
+  User findById(Long id);
 }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2017 Viktor Citaku
+ * Copyright (c) 2020 Viktor Citaku
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,34 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.webmodule;
+package dev.viktorcitaku.webmodule.config;
 
-import dev.viktorcitaku.webmodule.boundary.JmsDemoService;
-import dev.viktorcitaku.webmodule.boundary.UserService;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.enterprise.inject.Produces;
+import javax.jms.Queue;
+import javax.jms.Topic;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-@ApplicationPath("api")
-public class AppRoot extends Application {
+public class DestinationProducer {
 
-  @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
-    classes.add(JmsDemoService.class);
-    return classes;
+  @Produces
+  @SimpleQueue
+  public Queue getQueue() throws NamingException {
+    Context context = new InitialContext();
+    return (Queue) context.lookup("jms/SimpleQueue");
+  }
+
+  @Produces
+  @XmlBasedSimpleQueue
+  public Queue getQueueXmlBasedMdbQueue() throws NamingException {
+    Context context = new InitialContext();
+    return (Queue) context.lookup("jms/XmlBasedSimpleQueue");
+  }
+
+  @Produces
+  public Topic getTopic() throws NamingException {
+    Context context = new InitialContext();
+    return (Topic) context.lookup("jms/SimpleTopic");
   }
 }

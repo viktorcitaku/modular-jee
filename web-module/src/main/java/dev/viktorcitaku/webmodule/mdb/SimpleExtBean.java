@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2017 Viktor Citaku
+ * Copyright (c) 2020 Viktor Citaku
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,21 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.webmodule;
+package dev.viktorcitaku.webmodule.mdb;
 
-import dev.viktorcitaku.webmodule.boundary.JmsDemoService;
-import dev.viktorcitaku.webmodule.boundary.UserService;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import java.util.logging.Logger;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 
-@ApplicationPath("api")
-public class AppRoot extends Application {
+@Local({SimpleLocal.class})
+@Stateless
+public class SimpleExtBean implements SimpleLocal {
+
+  private static final Logger LOGGER = Logger.getLogger(SimpleExtBean.class.getName());
 
   @Override
-  public Set<Class<?>> getClasses() {
-    Set<Class<?>> classes = new HashSet<>();
-    classes.add(UserService.class);
-    classes.add(JmsDemoService.class);
-    return classes;
+  public void printMessage(String message) {
+    final String customMessage = message + " EXT";
+    LOGGER.info("The message from XML based MDB is: " + customMessage);
   }
 }

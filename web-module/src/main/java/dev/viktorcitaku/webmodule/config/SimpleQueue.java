@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2017 Viktor Citaku
+ * Copyright (c) 2020 Viktor Citaku
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,17 @@
  * SOFTWARE.
  */
 
-package dev.viktorcitaku.contract;
+package dev.viktorcitaku.webmodule.config;
 
-import java.util.List;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.inject.Qualifier;
 
-public interface PersonDao {
-
-  void create(Person person);
-
-  List<Person> getPersons();
-
-  Person update(Person person);
-
-  void delete(Person person);
-
-  Person findById(Long id);
-}
+@Qualifier
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD})
+public @interface SimpleQueue {}

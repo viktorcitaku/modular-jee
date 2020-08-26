@@ -24,8 +24,8 @@
 
 package dev.viktorcitaku.webmodule.boundary;
 
-import dev.viktorcitaku.contract.Person;
-import dev.viktorcitaku.contract.PersonDao;
+import dev.viktorcitaku.contract.User;
+import dev.viktorcitaku.contract.UserDao;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -46,26 +46,26 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("persons")
+@Path("users")
 @RequestScoped
 @Transactional
-public class PersonService {
+public class UserService {
 
   // In Java 9 and above System.getLogger(...) will be used!
   // private static final System.Logger LOGGER = System.getLogger(Class.class.getName());
-  private static final Logger LOGGER = Logger.getLogger(PersonService.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
   // No need to make this private
-  @Inject PersonDao personDao;
+  @Inject UserDao userDao;
 
   @PostConstruct
   protected void postConstruct() {
-    LOGGER.info("PersonService @PostConstruct");
+    LOGGER.info("UserService @PostConstruct");
   }
 
   @PreDestroy
   protected void preDestroy() {
-    LOGGER.info("PersonService @PreDestroy");
+    LOGGER.info("UserService @PreDestroy");
   }
 
   @GET
@@ -77,70 +77,70 @@ public class PersonService {
 
   @GET
   @Produces({MediaType.APPLICATION_JSON})
-  public Response getPersons(@QueryParam("id") Long id) {
+  public Response getUsers(@QueryParam("id") Long id) {
     if (id == null) {
       LOGGER.warning("ID is null!");
-      List<Person> people = personDao.getPersons();
-      if (people == null || people.isEmpty()) {
-        LOGGER.warning("Persons are null or empty!");
+      List<User> users = userDao.getUsers();
+      if (users == null || users.isEmpty()) {
+        LOGGER.warning("Users are null or empty!");
         return Response.status(Response.Status.NO_CONTENT).build();
       }
       JsonArrayBuilder builder = Json.createArrayBuilder();
-      people.stream().map(Person::toJson).forEach(builder::add);
-      LOGGER.info("Persons are found!");
+      users.stream().map(User::toJson).forEach(builder::add);
+      LOGGER.info("Users are found!");
       return Response.ok().entity(builder.build()).build();
     } else {
-      Person person = personDao.findById(id);
-      if (person == null) {
-        LOGGER.warning("No person found with given ID: " + id);
+      User user = userDao.findById(id);
+      if (user == null) {
+        LOGGER.warning("No user found with given ID: " + id);
         return Response.status(Response.Status.NO_CONTENT).build();
       }
-      LOGGER.info("Person: " + person);
-      return Response.ok().entity(person).build();
+      LOGGER.info("User: " + user);
+      return Response.ok().entity(user).build();
     }
   }
 
   @POST
   @Consumes({MediaType.APPLICATION_JSON})
-  public Response createPerson(Person person) {
-    if (person == null) {
-      LOGGER.warning("Person is null!");
+  public Response createUser(User user) {
+    if (user == null) {
+      LOGGER.warning("User is null!");
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    LOGGER.info("Person: " + person);
-    personDao.create((Person) person);
+    LOGGER.info("User: " + user);
+    userDao.create((User) user);
     return Response.status(Response.Status.CREATED).build();
   }
 
   @PUT
   @Produces({MediaType.APPLICATION_JSON})
   @Consumes({MediaType.APPLICATION_JSON})
-  public Response updatePerson(Person person) {
-    if (person == null) {
-      LOGGER.warning("Person is null!");
+  public Response updateUser(User user) {
+    if (user == null) {
+      LOGGER.warning("User is null!");
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    Person updatedPerson = personDao.update(person);
-    LOGGER.info("Person: " + updatedPerson);
-    return Response.ok().entity(updatedPerson).build();
+    User updatedUser = userDao.update(user);
+    LOGGER.info("User: " + updatedUser);
+    return Response.ok().entity(updatedUser).build();
   }
 
   @DELETE
   @Consumes({MediaType.APPLICATION_JSON})
-  public Response deletePerson(Person person, @QueryParam("id") Long id) {
-    if (person == null && id == null) {
-      LOGGER.warning("Person payload and also the id are null!");
+  public Response deleteUser(User user, @QueryParam("id") Long id) {
+    if (user == null && id == null) {
+      LOGGER.warning("User payload and also the id are null!");
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    Person personFound = personDao.findById(id);
-    if (personFound == null) {
-      LOGGER.warning("Person may not be deleted!");
-      personDao.delete(person);
+    User userFound = userDao.findById(id);
+    if (userFound == null) {
+      LOGGER.warning("User may not be deleted!");
+      userDao.delete(user);
       return Response.status(Response.Status.ACCEPTED).build();
     }
     // Safe point, that we ensure user is really deleted!
-    personDao.delete(personFound);
-    LOGGER.info("Deleted Person: " + personFound);
+    userDao.delete(userFound);
+    LOGGER.info("Deleted User: " + userFound);
     return Response.ok().build();
   }
 }

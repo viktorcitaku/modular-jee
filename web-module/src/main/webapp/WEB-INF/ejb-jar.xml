@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ejb-jar xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd"
+	version="3.2">
+	<enterprise-beans>
+		<message-driven>
+			<ejb-name>XmlBasedSampleQueueMDBean</ejb-name>
+			<ejb-class>dev.viktorcitaku.webmodule.mdb.XmlBasedSampleQueueMDBean</ejb-class>
+			<messaging-type>javax.jms.MessageListener</messaging-type>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>destinationLookup</activation-config-property-name>
+					<activation-config-property-value>jms/XmlBasedSimpleQueue</activation-config-property-value>
+				</activation-config-property>
+				<activation-config-property>
+					<activation-config-property-name>destinationType</activation-config-property-name>
+					<activation-config-property-value>javax.jms.Queue</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+			<ejb-local-ref>
+				<ejb-ref-name>SimpleExtBean</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<injection-target>
+					<injection-target-class>dev.viktorcitaku.webmodule.mdb.XmlBasedSampleQueueMDBean</injection-target-class>
+					<injection-target-name>simpleLocal</injection-target-name>
+				</injection-target>
+				<lookup-name>java:global/web-module-1.0.0-SNAPSHOT/SimpleExtBean!dev.viktorcitaku.webmodule.mdb.SimpleLocal</lookup-name>
+			</ejb-local-ref>
+			<!--
+			<resource-env-ref>
+				<resource-env-ref-name>java:global/web-module-1.0.0-SNAPSHOT/SimpleExtBean!dev.viktorcitaku.webmodule.mdb.SimpleLocal</resource-env-ref-name>
+				<resource-env-ref-type>dev.viktorcitaku.webmodule.mdb.SimpleLocal</resource-env-ref-type>
+				<injection-target>
+					<injection-target-class>dev.viktorcitaku.webmodule.mdb.XmlBasedSampleQueueMDBean</injection-target-class>
+					<injection-target-name>simpleLocal</injection-target-name>
+				</injection-target>
+			</resource-env-ref>
+			-->
+		</message-driven>
+	</enterprise-beans>
+</ejb-jar>
